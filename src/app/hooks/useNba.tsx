@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useFavoriteSalonMutator } from "@/app/context/FavoriteSalonProvider";
 import { useAccountMutator } from "@/app/context/AccountProvider";
+import { useEffect, useState } from "react";
 
 export default () => {
   const { hasFavoriteSalon } = useFavoriteSalonMutator();
   const { hasAccount } = useAccountMutator();
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-  return useQuery({
+  const query = useQuery({
     queryKey: [{ favoriteSalon: hasFavoriteSalon }, { account: hasAccount }],
     queryFn: async () => {
       const response = await fetch("/api/data", {
@@ -24,4 +26,14 @@ export default () => {
       return response.json();
     },
   });
+  const { isLoading } = query;
+
+  // Set `isFirstLoad` to false after the initial data is loaded
+  useEffect(() => {
+    if (!isLoading) {
+      setIsFirstLoad(false);
+    }
+  }, [isLoading]);
+
+  return { isFirstLoad, ...query };
 };

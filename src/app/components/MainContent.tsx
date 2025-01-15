@@ -5,18 +5,11 @@ import SaveFavoriteSalonButton from "@/app/elements/SaveFavoriteSalonButton";
 import { useEffect, useState } from "react";
 
 export default () => {
-  const { data, isLoading, isError, isFetching } = useNba();
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-
-  // Set `isFirstLoad` to false after the initial data is loaded
-  useEffect(() => {
-    if (!isLoading) {
-      setIsFirstLoad(false);
-    }
-  }, [isLoading]);
+  const { data, isLoading, isError, isFetching, isFirstLoad } = useNba();
 
   if (isLoading && isFirstLoad) return <div>Loading...</div>;
   if (isError) return <div>Error help</div>;
+  console.log("isLoading,", isLoading);
 
   return (
     <>

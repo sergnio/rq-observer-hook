@@ -2,15 +2,15 @@
 import { useFavoriteSalonMutator } from "@/app/context/FavoriteSalonProvider";
 
 export default () => {
-  const { setHasFavoriteSalon } = useFavoriteSalonMutator();
+  const { hasFavoriteSalon, setHasFavoriteSalon } = useFavoriteSalonMutator();
 
   return (
     <button
       onClick={() => {
-        setHasFavoriteSalon(true);
+        setHasFavoriteSalon(!hasFavoriteSalon);
       }}
     >
-      Save as Favorite Salon
+      Fav. Salon Status: {hasFavoriteSalon ? "Favorited" : "Not Favorited"}
     </button>
   );
 };

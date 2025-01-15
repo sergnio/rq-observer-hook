@@ -2,15 +2,15 @@
 import { useAccountMutator } from "@/app/context/AccountProvider";
 
 export default () => {
-  const { setHasAccount } = useAccountMutator();
+  const { hasAccount, setHasAccount } = useAccountMutator();
 
   return (
     <button
       onClick={() => {
-        setHasAccount(true);
+        setHasAccount(!hasAccount);
       }}
     >
-      Save Account
+      Account Status: {hasAccount ? "Account Created" : "No Account"}
     </button>
   );
 };

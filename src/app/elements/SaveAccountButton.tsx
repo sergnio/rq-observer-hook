@@ -1,23 +1,23 @@
 "use client";
-import { useAccountMutator } from "@/app/context/AccountProvider";
+import { useSuppressedNbaMutator } from "@/app/context/NbaSuppressionProvider";
 interface Props {
   disabled: boolean;
 }
 
 export default ({ disabled }: Props) => {
-  const { hasAccount, setHasAccount } = useAccountMutator();
+  const { suppressedNba, setsuppressedNba } = useSuppressedNbaMutator();
 
   return (
     <button
       onClick={() => {
-        setHasAccount(!hasAccount);
+        setsuppressedNba(!suppressedNba);
       }}
       disabled={disabled}
       style={{
-        backgroundColor: hasAccount ? "green" : "red",
+        backgroundColor: suppressedNba ? "green" : "red",
       }}
     >
-      Account Status: {hasAccount ? "Account Created" : "No Account"}
+      Account Status: {suppressedNba ? "Account Created" : "No Account"}
     </button>
   );
 };

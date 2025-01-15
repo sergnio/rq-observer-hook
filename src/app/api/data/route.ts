@@ -13,9 +13,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const { hasAccount, hasFavoriteSalon } = suppressionStatus;
+    const { suppressedNba, hasFavoriteSalon } = suppressionStatus;
 
-    if (!hasAccount) {
+    if (!suppressedNba) {
       return NextResponse.json({ result: "newAddress" });
     }
 

@@ -1,6 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Overview
+This is a super contrived code example of:
+* How we use ReactQuery as an observer if values change
+* We rely on the server data to be returned to us
 
-## Getting Started
+## Local installation steps
 
 First, run the development server:
 

@@ -13,17 +13,17 @@ export async function POST(request: Request) {
       );
     }
 
-    const { addAddress, favoriteSalon } = suppressionStatus;
+    const { hasAccount, hasFavoriteSalon } = suppressionStatus;
 
-    if (favoriteSalon) {
-      return NextResponse.json({ result: "favoriteSalon" });
-    }
-
-    if (addAddress) {
+    if (!hasAccount) {
       return NextResponse.json({ result: "newAddress" });
     }
 
-    return NextResponse.json({ result: "defaultResult" });
+    if (!hasFavoriteSalon) {
+      return NextResponse.json({ result: "favoriteSalon" });
+    }
+
+    return NextResponse.json({ result: "some other result" });
   } catch (error) {
     console.error("Error processing API request:", error);
     return NextResponse.json(

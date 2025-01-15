@@ -7,14 +7,14 @@ export default () => {
   const { hasAccount } = useAccountMutator();
 
   return useQuery({
-    queryKey: [hasFavoriteSalon, hasAccount],
+    queryKey: [{ favoriteSalon: hasFavoriteSalon }, { account: hasAccount }],
     queryFn: async () => {
-      const body = { suppressionStatus: { hasFavoriteSalon, hasAccount } };
-
       const response = await fetch("/api/data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ body }),
+        body: JSON.stringify({
+          suppressionStatus: { hasFavoriteSalon, hasAccount },
+        }),
       });
 
       if (!response.ok) {

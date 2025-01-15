@@ -1,16 +1,34 @@
 // app/api/data/route.ts
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const firstState = url.searchParams.get("firstState") === "true";
-  const secondState = url.searchParams.get("secondState") === "true";
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
 
-  if (firstState) {
-    return NextResponse.json({ result: "newAccount" });
+    const suppressionStatus = body.suppressionStatus;
+    if (!suppressionStatus) {
+      return NextResponse.json(
+        { error: "Missing suppressionStatus in request body" },
+        { status: 400 },
+      );
+    }
+
+    const { addAddress, favoriteSalon } = suppressionStatus;
+
+    if (favoriteSalon) {
+      return NextResponse.json({ result: "favoriteSalon" });
+    }
+
+    if (addAddress) {
+      return NextResponse.json({ result: "newAddress" });
+    }
+
+    return NextResponse.json({ result: "defaultResult" });
+  } catch (error) {
+    console.error("Error processing API request:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
-  if (secondState) {
-    return NextResponse.json({ result: "favoriteSalon" });
-  }
-  return NextResponse.json({ result: "newAddress" });
 }

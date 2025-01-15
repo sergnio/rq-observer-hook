@@ -34,7 +34,12 @@ button:hover {
   background: #333;
 }
 
-button:active {
+button:active:not(:disabled) {
   transform: scale(0.95);
   opacity: 80%;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 50%;
 }

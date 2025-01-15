@@ -5,6 +5,9 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
+    // Arbitrary 1 second delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     const suppressionStatus = body.suppressionStatus;
     if (!suppressionStatus) {
       return NextResponse.json(

@@ -13,7 +13,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
       <AccountProvider>
         <FavoriteSalonProvider>{children}</FavoriteSalonProvider>
       </AccountProvider>
-      <ReactQueryDevtools initialIsOpen />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };

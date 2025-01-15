@@ -25,6 +25,7 @@ export default () => {
 
       return response.json();
     },
+    staleTime: Infinity,
   });
   const { isLoading } = query;
 
